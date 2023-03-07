@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Lottery;
 
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ItemsList extends Component
@@ -14,8 +15,14 @@ class ItemsList extends Component
 
     public function itemAdded($itemAdded)
     {
+        if (Str::contains($itemAdded, ",")){
+            $newArr = explode(',',$itemAdded);
+            $this->items = array_merge($this->items, $newArr);
+        }else{
+            $this->items[] = $itemAdded;
+        }
 
-        $this->items[] = $itemAdded;
+
 
     }
 
